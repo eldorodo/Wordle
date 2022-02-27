@@ -1,6 +1,5 @@
 #https://www.analyticsvidhya.com/blog/2021/06/kmodes-clustering-algorithm-for-categorical-data/
 #https://towardsdatascience.com/clustering-algorithm-for-data-with-mixed-categorical-and-numerical-features-d4e3a48066a0
-from distutils import dist
 import pandas as pd
 import numpy as np
 
