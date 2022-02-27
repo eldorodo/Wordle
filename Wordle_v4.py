@@ -300,14 +300,14 @@ new_gmm_df = gmm_df[idx]
 
 final_combo_list_master =[]
 uniq =[]
-for i in range(3):
+for i in range(10):
     stratified_df = stratified_sample_df(new_gmm_df, col = "labels", n_samples= 1)
     print(i, stratified_df)
     word_combo = list(stratified_df["words"])
     dist_df_all = dist_matrix(word_combo)
-    t = combinations(word_combo, 5)
+    t = combinations(word_combo, 4)
     lst_t = list(t)
-    lst_t = random.sample(lst_t, int(len(lst_t)*0.5))
+    lst_t = random.sample(lst_t, int(len(lst_t)*1))
     for c in lst_t:
         d = tuple(sorted(c))
         if(d in uniq):
@@ -324,7 +324,7 @@ for i in range(3):
 #print(final_combo_list_master)
 
 
-final_combo = pd.DataFrame(final_combo_list_master, columns =['word1', 'word2', 'word3', 'word4', 'word5', 'dist'])
+final_combo = pd.DataFrame(final_combo_list_master, columns =['word1', 'word2', 'word3', 'word4', 'dist'])
 #final_combo = pd.DataFrame(final_combo_list, columns =['word1', 'word2', 'word3', 'dist'])
 
 
@@ -346,7 +346,7 @@ final_combo.sort_values(by=["num_missing_letters", 'dist'], inplace=True, ascend
 
 print(final_combo.head(20))
 
-final_combo.to_csv("best_words_wordle.csv")
+final_combo.to_csv("best_words_wordle_4.csv",index=False)
 
 
 
