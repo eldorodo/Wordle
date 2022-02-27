@@ -4,27 +4,25 @@ from distutils import dist
 import pandas as pd
 import numpy as np
 
-from sklearn.cluster import KMeans
 from sklearn import metrics
-from sklearn.metrics import pairwise_distances
 
 import matplotlib.pyplot as plt
 
-from sklearn.decomposition import PCA
+#from sklearn.decomposition import PCA
 
-from scipy.spatial import ConvexHull
+#from scipy.spatial import ConvexHull
 
-from Factor2Approx import *
-from Soving_using_Gurobi import *
+#from Factor2Approx import *
+#from Soving_using_Gurobi import *
 
-from kmodes.kmodes import KModes
-from kmodes.kprototypes import KPrototypes
+#from kmodes.kmodes import KModes
+#from kmodes.kprototypes import KPrototypes
 
-import fuzzywuzzy
-from fuzzywuzzy import fuzz
-from fuzzywuzzy import process
+#import fuzzywuzzy
+#from fuzzywuzzy import fuzz
+#from fuzzywuzzy import process
 
-from sklearn.neighbors import NearestNeighbors
+#from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import minmax_scale
 
 import itertools
@@ -33,13 +31,13 @@ from itertools import combinations
 from sklearn.mixture import GaussianMixture
 import seaborn as sns
 
-import multiprocessing
-from multiprocessing import Pool
+#import multiprocessing
+#from multiprocessing import Pool
 
 import random
 
-def fuzzy_match_logic(your_word, choices):
-    return process.extractOne(your_word, choices, scorer=fuzz.token_sort_ratio)[0]
+#def fuzzy_match_logic(your_word, choices):
+    #return process.extractOne(your_word, choices, scorer=fuzz.token_sort_ratio)[0]
 
 # Hamming distance
 def hammingDist(str1, str2):
@@ -74,23 +72,23 @@ def is_char_present(your_word, your_char):
     else:
         return 0
 #https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.NearestNeighbors.html
-def nearest_index(samples, your_array, nearby = 2):
-    neigh = NearestNeighbors(n_neighbors=nearby, radius=0.4)
-    neigh.fit(samples)
-    indices_list = np.array(neigh.kneighbors(your_array, nearby, return_distance=False)[0]).tolist()
-    return indices_list
+# def nearest_index(samples, your_array, nearby = 2):
+#     neigh = NearestNeighbors(n_neighbors=nearby, radius=0.4)
+#     neigh.fit(samples)
+#     indices_list = np.array(neigh.kneighbors(your_array, nearby, return_distance=False)[0]).tolist()
+#     return indices_list
 
-def k_means_graph(X,k_max = 15):
-    wcss = []  #Within-Cluster Sum of Square
-    for i in range(1, k_max): 
-        kmeans_model = KMeans(n_clusters = i, init = 'k-means++', random_state = 42, n_init = 5, max_iter = 50)
-        kmeans_model.fit(X) 
-        wcss.append(kmeans_model.inertia_)
+# def k_means_graph(X,k_max = 15):
+#     wcss = []  #Within-Cluster Sum of Square
+#     for i in range(1, k_max): 
+#         kmeans_model = KMeans(n_clusters = i, init = 'k-means++', random_state = 42, n_init = 5, max_iter = 50)
+#         kmeans_model.fit(X) 
+#         wcss.append(kmeans_model.inertia_)
 
-    plt.plot(range(1,k_max), wcss)
-    plt.xlabel('Number of clusters')
-    plt.ylabel('WCSS') 
-    plt.show()
+#     plt.plot(range(1,k_max), wcss)
+#     plt.xlabel('Number of clusters')
+#     plt.ylabel('WCSS') 
+#     plt.show()
 
 def missing_letters(shortlist_list):
     letter_list = []
@@ -225,44 +223,44 @@ index_words = df.index
 
 #k_means_graph(X,k_max=50)
 
-def shortlist_of_words(X, k, x_index, nearby = 1):
-    shortlist_words = []
-    shortlist_words_cluster_wise =[]
+# def shortlist_of_words(X, k, x_index, nearby = 1):
+#     shortlist_words = []
+#     shortlist_words_cluster_wise =[]
 
-    kmeans_model = KMeans(n_clusters = k, init = 'k-means++', random_state = 42, n_init = 100, max_iter = 1000)
-    kmeans_model.fit(X)
-    label_arr = np.array(kmeans_model.labels_)
-    clus_centers =  np.array(kmeans_model.cluster_centers_)
-    for i in clus_centers:
-        near_indexes = nearest_index(X, [i], nearby=nearby)
-        temp =[]
-        for j in  near_indexes:
-            temp.append(x_index[j])
-            shortlist_words.append(x_index[j])
-        shortlist_words_cluster_wise.append(temp)
+#     kmeans_model = KMeans(n_clusters = k, init = 'k-means++', random_state = 42, n_init = 100, max_iter = 1000)
+#     kmeans_model.fit(X)
+#     label_arr = np.array(kmeans_model.labels_)
+#     clus_centers =  np.array(kmeans_model.cluster_centers_)
+#     for i in clus_centers:
+#         near_indexes = nearest_index(X, [i], nearby=nearby)
+#         temp =[]
+#         for j in  near_indexes:
+#             temp.append(x_index[j])
+#             shortlist_words.append(x_index[j])
+#         shortlist_words_cluster_wise.append(temp)
 
-    return shortlist_words, shortlist_words_cluster_wise
+#     return shortlist_words, shortlist_words_cluster_wise
 
-first_shortlist_words, first_shortlist_words_cl = shortlist_of_words(X, 6, index_words, 1)
-print("first_shortlist_words", first_shortlist_words)
+# first_shortlist_words, first_shortlist_words_cl = shortlist_of_words(X, 6, index_words, 1)
+# print("first_shortlist_words", first_shortlist_words)
 
-first_shortlist_dist = dist_matrix(first_shortlist_words)
-first_shortlist_words_cl_iter = [list(x) for x in np.array(np.meshgrid(*first_shortlist_words_cl)).T.reshape(-1,len(first_shortlist_words_cl))]
+# first_shortlist_dist = dist_matrix(first_shortlist_words)
+# first_shortlist_words_cl_iter = [list(x) for x in np.array(np.meshgrid(*first_shortlist_words_cl)).T.reshape(-1,len(first_shortlist_words_cl))]
 
-shortlist_df = df[df.index.isin(first_shortlist_words)]
-index_words_updated = shortlist_df.index
-X2 = shortlist_df.values
+# shortlist_df = df[df.index.isin(first_shortlist_words)]
+# index_words_updated = shortlist_df.index
+# X2 = shortlist_df.values
 
-second_shortlist_words = shortlist_five_words(first_shortlist_words_cl_iter)
+# second_shortlist_words = shortlist_five_words(first_shortlist_words_cl_iter)
 
-print("second_shortlist_words", second_shortlist_words)
+# print("second_shortlist_words", second_shortlist_words)
 
-shortlist_df = df[df.index.isin(second_shortlist_words)]
-index_words_updated = shortlist_df.index
+# shortlist_df = df[df.index.isin(second_shortlist_words)]
+# index_words_updated = shortlist_df.index
 
 
-print("missing letters first", missing_letters(first_shortlist_words))
-print("missing letters second", missing_letters(second_shortlist_words))
+# print("missing letters first", missing_letters(first_shortlist_words))
+# print("missing letters second", missing_letters(second_shortlist_words))
 
 
 
