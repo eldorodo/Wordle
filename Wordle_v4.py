@@ -3,7 +3,6 @@
 import pandas as pd
 import numpy as np
 
-from sklearn import metrics
 
 import matplotlib.pyplot as plt
 
@@ -24,11 +23,9 @@ import matplotlib.pyplot as plt
 #from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import minmax_scale
 
-import itertools
 from itertools import combinations
 
 from sklearn.mixture import GaussianMixture
-import seaborn as sns
 
 #import multiprocessing
 #from multiprocessing import Pool
