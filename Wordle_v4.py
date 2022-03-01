@@ -47,7 +47,7 @@ def hammingDist(str1, str2):
     return count
 
 def distance_of_strings(test_str1, test_str2):
-    return len(test_str1) - len(set(test_str1).intersection(set(test_str2)))
+    return len(set(test_str1)) - len(set(test_str1).intersection(test_str2))
 
 def dist_matrix(word_list):
     dist_matrix_df = pd.DataFrame(0, index=word_list, columns=word_list)
@@ -262,13 +262,13 @@ index_words = df.index
 
 ######################### GMM #####################
 
-n_components = np.arange(1, 1)
+n_components = np.arange(1, 40)
 models = [GaussianMixture(n, covariance_type='full', random_state=0).fit(X) for n in n_components]
 plt.plot(n_components, [m.bic(X) for m in models], label='BIC')
 plt.plot(n_components, [m.aic(X) for m in models], label='AIC')
 plt.legend(loc='best')
 plt.xlabel('n_components')
-#plt.show()
+plt.show()
 
 n_components = 38
 gmm = GaussianMixture(n_components=n_components, n_init= 10, max_iter= 400)

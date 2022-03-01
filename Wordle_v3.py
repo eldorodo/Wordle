@@ -54,7 +54,7 @@ def hammingDist(str1, str2):
     return count
 
 def distance_of_strings(test_str1, test_str2):
-    return len(test_str1) - len(set(test_str1).intersection(set(test_str2)))
+    return len(set(test_str1)) - len(set(test_str1).intersection(test_str2))
 
 def dist_matrix(word_list):
     dist_matrix_df = pd.DataFrame(0, index=word_list, columns=word_list)
